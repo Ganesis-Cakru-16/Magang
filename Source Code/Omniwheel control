@@ -1,0 +1,286 @@
+#define enA1 9
+#define enB1 10
+#define in11 4
+#define in21 5
+#define in31 6
+#define in41 7
+
+#define enA2 3
+#define enB2 11
+#define in12 1
+#define in22 2
+#define in32 12
+#define in42 13
+
+int motorSpeedA1 = 0;
+int motorSpeedB1 = 0;
+int motorSpeedA2 = 0;
+int motorSpeedB2 = 0;
+
+void setup() {
+  pinMode(enA1, OUTPUT);
+  pinMode(enB1, OUTPUT);
+  pinMode(in11, OUTPUT);
+  pinMode(in21, OUTPUT);
+  pinMode(in31, OUTPUT);
+  pinMode(in41, OUTPUT);
+
+  pinMode(enA2, OUTPUT);
+  pinMode(enB2, OUTPUT);
+  pinMode(in12, OUTPUT);
+  pinMode(in22, OUTPUT);
+  pinMode(in32, OUTPUT);
+  pinMode(in42, OUTPUT);
+
+  Serial.begin(9600); // Memulai komunikasi serial
+}
+
+void loop() {
+  //if (Serial.available() > 0) { // Jika ada data yang tersedia di Serial Monitor
+  //  int motorNumber = Serial.parseInt(); // Membaca nomor motor
+  //  int action = Serial.parseInt(); // Membaca tindakan (cw/ccw/stop)
+  //  int speed = Serial.parseInt(); // Membaca nilai kecepatan
+  //  
+  //  // Pemrosesan berdasarkan input
+  //  if (motorNumber == 1) {
+  //    if (action == 1) {
+  //      motorcw1(speed); // Motor 1, cw
+  //    } else if (action == 2) {
+  //      motorccw1(speed); // Motor 1, ccw
+  //    } else if (action == 0) {
+  //      motorStop1(); // Motor 1, stop
+  //    }
+  //  } else if (motorNumber == 2) {
+  //    if (action == 1) {
+  //      motorcw2(speed); // Motor 2, cw
+  //    } else if (action == 2) {
+  //      motorccw2(speed); // Motor 2, ccw
+  //    } else if (action == 0) {
+  //      motorStop2(); // Motor 2, stop
+  //    }
+  //  } else if (motorNumber == 3) {
+  //    if (action == 1) {
+  //      motorcw3(speed); // Motor 3, cw
+  //    } else if (action == 2) {
+  //      motorccw3(speed); // Motor 3, ccw
+  //    } else if (action == 0) {
+  //      motorStop3(); // Motor 3, stop
+  //    }
+  //  } else if (motorNumber == 4) {
+  //    if (action == 1) {
+  //      motorcw4(speed); // Motor 4, cw
+  //    } else if (action == 2) {
+  //      motorccw4(speed); // Motor 4, ccw
+  //    } else if (action == 0) {
+  //      motorStop4(); // Motor 4, stop
+  //    }
+  //  }
+  //}
+  maju(155);
+  delay(2500);
+  mundur(155);
+  delay(2500);
+  kiri(155);
+  delay(2500);
+  kanan(155);
+  delay(2500);
+  depanKanan(155);
+  delay(2500);
+  depanKiri(155);
+  delay(2500);
+  belakangKiri(155);
+  delay(2500);
+  belakangKanan(155);
+  delay(2500);
+}
+
+
+// Fungsi untuk menggerakkan motor 1 searah jarum jam dengan kecepatan tertentu
+void motorcw1(int speed) {
+    motorSpeedA1 = speed;
+    analogWrite(enA1, motorSpeedA1);
+    digitalWrite(in11, HIGH);
+    digitalWrite(in21, LOW);
+}
+
+// MOTOR 1
+// Fungsi untuk menggerakkan motor 1 berlawanan arah jarum jam dengan kecepatan tertentu
+void motorccw1(int speed) {
+    motorSpeedA1 = speed;
+    analogWrite(enA1, motorSpeedA1);
+    digitalWrite(in11, LOW);
+    digitalWrite(in21, HIGH);
+}
+
+// Fungsi untuk menghentikan motor 1
+void motorStop1() {
+    motorSpeedA1 = 0;
+    analogWrite(enA1, motorSpeedA1);
+}
+
+// MOTOR 2
+// Fungsi untuk menggerakkan motor 2 searah jarum jam dengan kecepatan tertentu
+void motorcw2(int speed) {
+    motorSpeedB1 = speed; // Perbarui kecepatan motor B1
+    analogWrite(enB1, motorSpeedB1);
+    digitalWrite(in31, HIGH);
+    digitalWrite(in41, LOW);
+}
+
+// Fungsi untuk menggerakkan motor 2 searah berlawanan jarum jam dengan kecepatan tertentu
+void motorccw2(int speed) {
+    motorSpeedB1 = speed; // Perbarui kecepatan motor B1
+    analogWrite(enB1, motorSpeedB1);
+    digitalWrite(in31, LOW);
+    digitalWrite(in41, HIGH);
+}
+
+// Fungsi untuk menghentikan motor 2
+void motorStop2() {
+    motorSpeedB1 = 0;
+    analogWrite(enB1, motorSpeedB1);
+}
+
+// MOTOR 3
+// Fungsi untuk menggerakkan motor 3 searah jarum jam dengan kecepatan tertentu
+void motorcw3(int speed) {
+    motorSpeedA2 = speed;
+    analogWrite(enA2, motorSpeedA2);
+    digitalWrite(in12, HIGH);
+    digitalWrite(in22, LOW);
+}
+
+// Fungsi untuk menggerakkan motor 3 berlawanan arah jarum jam dengan kecepatan tertentu
+void motorccw3(int speed) {
+    motorSpeedA2 = speed;
+    analogWrite(enA2, motorSpeedA2);
+    digitalWrite(in12, LOW);
+    digitalWrite(in22, HIGH);
+}
+
+// Fungsi untuk menghentikan motor 3
+void motorStop3() {
+    motorSpeedA2 = 0;
+    analogWrite(enA2, motorSpeedA2);
+}
+
+// MOTOR 4
+// Fungsi untuk menggerakkan motor 4 searah jarum jam dengan kecepatan tertentu
+void motorcw4(int speed) {
+    motorSpeedB2 = speed; // Perbarui kecepatan motor B2
+    analogWrite(enB2, motorSpeedB2);
+    digitalWrite(in32, HIGH);
+    digitalWrite(in42, LOW);
+}
+
+// Fungsi untuk menggerakkan motor 4 searah berlawanan jarum jam dengan kecepatan tertentu
+void motorccw4(int speed) {
+    motorSpeedB2 = speed; // Perbarui kecepatan motor B2
+    analogWrite(enB2, motorSpeedB2);
+    digitalWrite(in32, LOW);
+    digitalWrite(in42, HIGH);
+}
+
+
+// Fungsi untuk menghentikan motor 4
+void motorStop4() {
+    motorSpeedB2 = 0;
+    analogWrite(enB2, motorSpeedB2);
+}
+
+void motor1(bool dir,int pwm){
+  if (dir) {
+    motorcw1(pwm);
+  }
+  else {
+    motorccw1(pwm);
+  }
+}
+void motor2(bool dir,int pwm){
+  if (dir) {
+    motorcw2(pwm);
+  }
+  else {
+    motorccw2(pwm);
+  }
+}
+void motor3(bool dir,int pwm){
+  if (dir) {
+    motorcw3(pwm);
+  }
+  else {
+    motorccw3(pwm);
+  }
+}
+void motor4(bool dir,int pwm){
+  if (dir) {
+    motorcw4(pwm);
+  }
+  else {
+    motorccw4(pwm);
+  }
+}
+//direction bisa cw (true) ccw(false)
+
+void maju(int speed) {
+  motor1(true, speed);
+  motor2(false, speed);
+  motor3(false, speed);
+  motor4(true, speed);
+}
+
+void mundur(int speed) {
+  motor1(false, speed);
+  motor2(true, speed);
+  motor3(true, speed);
+  motor4(false, speed);
+}
+
+void kiri(int speed) {
+  motor1(false, speed);
+  motor2(false, speed);
+  motor3(true, speed);
+  motor4(true, speed);
+}
+
+void kanan(int speed) {
+  motor1(true, speed);
+  motor2(true, speed);
+  motor3(false, speed);
+  motor4(false, speed);
+}
+
+void depanKiri(int speed) {
+  motor2(false, speed);
+  motor4(true, speed);
+  motor1(true, 0);
+  motor3(true, 0);
+}
+
+void depanKanan(int speed) {
+  motor1(true, speed);
+  motor3(false, speed);
+  motor2(true, 0);
+  motor4(true, 0);
+}
+
+void belakangKiri(int speed) {
+  motor1(false, speed);
+  motor3(true, speed);
+  motor2(true, 0);
+  motor4(true, 0);
+}
+
+void belakangKanan(int speed) {
+  motor2(true, speed);
+  motor4(false, speed);
+  motor1(true, 0);
+  motor3(true, 0);
+}
+
+void rotate(bool dir, int speed) {
+  motor1(dir, speed);
+  motor2(dir, speed);
+  motor3(dir, speed);
+  motor4(dir, speed);
+}
