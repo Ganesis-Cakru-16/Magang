@@ -1,0 +1,29 @@
+import cv2
+import numpy as np
+
+vidcap=cv2.VideoCapture(".\Videodemo.mp4")
+success, image =vidcap.read()
+
+while success:
+    success, image=vidcap.read()
+    img=cv2.resize(image, (1280,720))
+    tl =[306,399] 
+    bl=[0,720]
+    tr=[976,399]
+    br=[1280,720]
+
+    cv2.circle(img,tl,5,[0,0,255],-1)
+    cv2.circle(img,bl,5,[0,0,255],-1)
+    cv2.circle(img,tr,5,[0,0,255],-1)
+    cv2.circle(img,br,5,[0,0,255],-1)
+
+    pts1=np.float32([tl,bl,tr,br])
+    pts2=np.float32([[0,0],[0,720],[1280,0],[1280,720]]) 
+
+    matrix=cv2.getPerspectiveTransform(pts1,pts2)
+    newframe=cv2.warpPerspective( img ,matrix, (1280,760))
+
+    cv2.imshow("Window",img)
+    cv2.imshow("BEV",newframe)
+    if cv2.waitKey(1)==27:
+        break
